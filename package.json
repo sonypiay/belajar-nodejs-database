@@ -20,5 +20,8 @@
     "transform": {
       "^.+\\.[t|j]sx?$": "babel-jest"
     }
+  },
+  "dependencies": {
+    "@prisma/client": "^5.21.1"
   }
 }
