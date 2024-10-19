@@ -2,10 +2,16 @@ import { prismaClient } from "../src/prisma-client.js";
 
 describe("Query SQL", () => {
     it("should be able to query sql", async () => {
+        await prismaClient.$connect();
+        
         const id = 1;
-        const name = "Sony";
-        const result = await prismaClient.$executeRaw`INSERT INTO sample(id, name) VALUES(${id}, ${name})`;
+        const results = await prismaClient.$queryRaw`SELECT * FROM sample WHERE id = ${id}`;
 
-        expect(result).toBe(1);
+        for( const result of results ) {
+            console.info(result.id);
+            console.info(result.name);
+        }
+
+        await prismaClient.$disconnect();
     });
 });
